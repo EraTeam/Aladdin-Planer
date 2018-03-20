@@ -2,7 +2,7 @@
 
 Python and JavaScript based application for project management.
 
-### Basic setup fro flask
+### Basic setup for flask
 Note: Do everything in Terminal.
 
 
