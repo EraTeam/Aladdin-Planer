@@ -20,3 +20,9 @@ Navigate to the project root dir, open Terminal and type in:
 
 
 To close the flask server, go back to the terminal and press: [STRG] + [c]
+
+### Git-Notes: Files to ignore
+Basically all files under "Aladdin-Planer/.idea" must be ignored.
+
+Do this by  "Settings" -> "Version Control" -> "Configure Ignored Files" -> "Add" -> "Ignore all files under"
+            -> "PATH_TO_YOUR_DIRECTORY/Aladdin-Planer/.idea"
