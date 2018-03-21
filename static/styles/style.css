@@ -1,4 +1,17 @@
 body {
-    margin:0;
-    font-family: Arial;
+    margin: 0;
+    background: #f1f1f1;
+}
+
+.header {
+    background: #fff;
+    box-shadow: 0 0 20px #c7c7c7;
+}
+
+.header > .container {
+    padding: 1%;
+}
+
+.header h5 {
+    margin-bottom: 0;
 }

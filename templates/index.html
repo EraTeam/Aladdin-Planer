@@ -1,12 +1,94 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+
+    <!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
     <title>{{ siteTitle }}</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/normalize.min.css') }}">-->
+    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/skeleton.min.css') }}">-->
+    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/card.min.css') }}">-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/skeleton.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/card.css') }}">
+
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
 </head>
 <body>
 
-    <h1>Hello from Aladdin Planer!</h1>
+<!-- Primary Page Layout
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<section class="header">
+    <div class="container">
+        <h5 class="header-message">{{ greetMessage }}{{ userName }}{{ locationMessage }}</h5>
+    </div>
+</section>
 
+<div class="container">
+    <div class="row" style="margin-top: 10%">
+        <div class="col-4 column task-card-box">
+            <div class="task-card">
+                <h4>Beispiel Karte</h4>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                    labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+                    et
+                    ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                    et
+                    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+                    rebum.
+                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
+        </div>
+        <div class="col-4 column task-card-box">
+            <div class="task-card">
+                <h4>Beispiel Karte</h4>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                    labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+                    et
+                    ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                    et
+                    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+                    rebum.
+                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
+        </div>
+        <div class="col-4 column task-card-box">
+            <div class="task-card">
+                <h4>Beispiel Karte</h4>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                    labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+                    et
+                    ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                    et
+                    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+                    rebum.
+                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
 </html>
