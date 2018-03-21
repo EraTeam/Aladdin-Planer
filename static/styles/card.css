@@ -1,0 +1,13 @@
+.task-card-box {
+    box-shadow: 0 0 20px 0 #d0d0d0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.task-card {
+    margin: 3% 5%;
+}
+
+.task-card > p {
+    text-align: justify;
+}
