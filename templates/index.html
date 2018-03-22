@@ -20,13 +20,6 @@
     <!-- CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
-    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/normalize.min.css') }}">-->
-    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/skeleton.min.css') }}">-->
-    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/card.min.css') }}">-->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/normalize.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/skeleton.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/card.css') }}">
-
     <!-- Favicon
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
@@ -36,57 +29,23 @@
 <!-- Primary Page Layout
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <section class="header">
-    <div class="container">
-        <h5 class="header-message">{{ greetMessage }}{{ userName }}{{ locationMessage }}</h5>
-    </div>
+
 </section>
 
-<div class="container">
-    <div class="row" style="margin-top: 10%">
-        <div class="col-4 column task-card-box">
-            <div class="task-card">
-                <h4>Beispiel Karte</h4>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                    labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-                    et
-                    ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                    et
-                    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-                    rebum.
-                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-            </div>
-        </div>
-        <div class="col-4 column task-card-box">
-            <div class="task-card">
-                <h4>Beispiel Karte</h4>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                    labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-                    et
-                    ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                    et
-                    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-                    rebum.
-                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-            </div>
-        </div>
-        <div class="col-4 column task-card-box">
-            <div class="task-card">
-                <h4>Beispiel Karte</h4>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                    labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-                    et
-                    ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                    et
-                    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-                    rebum.
-                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-            </div>
-        </div>
-    </div>
-</div>
+{% if error %}
+<label class="error">Error:</label>{{ error }}
+{% endif %}
+
+<form action="http://localhost:5000/login" method="POST">
+    <form method="POST">
+        <label class="label">Benutzername</label>
+        <input type="text" name="username">
+        <label class="label">Passwort</label>
+        <input type="password" name="password">
+        <input type="submit" value="Einloggen">
+    </form>
+</form>
+
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
