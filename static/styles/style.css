@@ -1,17 +1,13 @@
-body {
-    margin: 0;
-    background: #f1f1f1;
+body{
+margin: 10px;
 }
 
-.header {
-    background: #fff;
-    box-shadow: 0 0 20px #c7c7c7;
+.label{
+display: block;
+width: 100px;
 }
 
-.header > .container {
-    padding: 1%;
+.error{
+color: red;
 }
 
-.header h5 {
-    margin-bottom: 0;
-}
