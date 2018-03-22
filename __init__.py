@@ -1,11 +1,40 @@
 from flask import Flask
-from flask import render_template
+from flask import render_template, request, url_for, redirect
 
 app = Flask(__name__)
+
+
+@app.route("/success/<name>")
+def success(name):
+    return "Herzlich Willkommen %s" % name
+
+
+@app.route("/failure/<name>")
+def failure(name):
+    return "Anmeldung für %s fehlgeschlagen, bitte erneut versuchen." % name
+
 
 @app.route("/")
 def index():
     return render_template('index.html', siteTitle="Aladdin Planer!", greetMessage="Willkommen ", userName="Hannelore Heftig", locationMessage=", hier ist deine Übersicht!")
+
+@app.route("/login", methods=["POST", "GET"])
+def login():
+    if request.method == "POST":
+        user = request.form["username"]
+        password = request.form["password"]
+        return validation(username=user, password=password)
+    else:
+        user = request.args.get("username")
+        password = request.args.get("password")
+        return validation(username=user, password=password)
+
+
+def validation(username, password):
+    if username == "admin" and password == "secret":
+        return redirect(url_for("success", name=username))
+    else:
+        return render_template("index.html", error="invalid credentials")
 
 
 if __name__ == '__main__':
