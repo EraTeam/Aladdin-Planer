@@ -18,6 +18,7 @@ def failure(name):
 def index():
     return render_template('index.html', siteTitle="Aladdin Planer!", greetMessage="Willkommen ", userName="Hannelore Heftig", locationMessage=", hier ist deine Übersicht!")
 
+
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
