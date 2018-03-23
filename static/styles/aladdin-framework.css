@@ -56,10 +56,6 @@ form fieldset input {
 }
 
 /* FORM SUBMIT BUTTON */
-form fieldset.submit.button input{
-    display: none;
-}
-
 form fieldset.submit.button {
     cursor: pointer;
 }
