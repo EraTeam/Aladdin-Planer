@@ -1,0 +1,66 @@
+
+
+body.error fieldset {
+    box-shadow: 0 8px 10px #bd3200;
+}
+
+/* LOGIN FORM CONTAINER */
+#login.container {
+    width: 30%;
+    margin: 15vh auto;
+}
+
+#login .form-box {
+    border: 1px solid transparent;
+}
+
+#login .form-box .row > .column:hover,
+#login .form-box .button.active
+{
+    box-shadow: 1px 1px 20px 0 #d6d6d6;
+}
+
+#login form {
+    background: #ac3a31;
+    box-shadow: 0 10px 20px #8a8a8a;
+        padding: 2em 0;
+
+}
+
+#login form fieldset {
+    width: 80%;
+    height: 60px;
+        margin: 2em auto;
+}
+
+body.error fieldset {
+    transform-origin: 50% 100%;
+    animation: error 0.3s ease-out;
+}
+
+#login form fieldset .icon.left {
+    font-size: 1.25em;
+    text-align: center;
+}
+
+#login form fieldset .icon.left i {
+    line-height: 30px;
+    position: relative;
+}
+
+#login .row {
+    margin: 1em auto 2em;
+    text-align: center;
+}
+
+#login .row > .column:hover {
+    text-align: center;box-shadow: 0 8px 10px #82322c;
+    transform: translateY(-1px);
+}
+
+#login .row h4 {
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+

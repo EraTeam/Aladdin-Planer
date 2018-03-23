@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!--@TODO: header auslagern und per python in jede seite setzen-->
+
+    <!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>{{ siteTitle }}</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/normalize.min.css') }}">-->
+    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/skeleton.min.css') }}">-->
+    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/card.min.css') }}">-->
+    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/normalize.css') }}">-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/skeleton.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/aladdin-framework.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/fontawesome-free-5.0.8/web-fonts-with-css/css/fontawesome-all.css') }}" >
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/login.css') }}">
+    <script src="{{ url_for('static',filename='javascript/jquery-3.3.1.min.js') }}"></script>
+
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+</head>
+<body>
+
+<!-- Primary Page Layout
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+<div id="login" class="container">
+
+    <div class="form-box">
+
+    <div class="row">
+        <div class="column col-9 button active">
+            <h4>Log In</h4>
+        </div>
+        <div class="column col-3 button">
+            <h4>Register</h4>
+        </div>
+    </div>
+
+    <form action="http://localhost:5000/login-req" method="POST">
+
+        <fieldset class="username">
+            <div class="icon left"><i class="fa fa-user"></i></div>
+            <input type="text" name="username" placeholder="Username"/>
+        </fieldset>
+        <fieldset class="email none">
+            <div class="icon left"><i class="fa fa-envelope"></i></div>
+            <input type="mail" name="email" placeholder="Email"/>
+        </fieldset>
+        <fieldset class="email none">
+            <div class="icon left"><i class="fa fa-envelope"></i></div>
+            <input type="mail" name="email-confirm" placeholder="Confirm Email"/>
+        </fieldset>
+        <fieldset class="password">
+            <div class="icon left"><i class="fa fa-lock"></i></div>
+            <input type="password" name="password" placeholder="Password"/>
+        </fieldset>
+        <fieldset class="password none">
+            <div class="icon left"><i class="fa fa-lock"></i></div>
+            <input type="password" name="password-confirm" placeholder="Confirm Password"/>
+        </fieldset>
+        <fieldset class="submit button">
+            <p>Log In</p>
+            <input type="submit" name="submit" placeholder="Submit"/>
+            <div class="icon right button"><i class="arrow"></i></div>
+        </fieldset>
+    </form>
+
+</div>
+    </div>
+
+
+<script type="text/javascript">
+
+    $('.form-box .row .button').on('click', function (e) {
+        e.preventDefault();
+        var $ele = $(this);
+        var $sibling = $(this).siblings();
+
+        $('input[name=email]').parent().toggleClass("none").toggleClass("pop-up");
+        $('input[name=email-confirm]').parent().toggleClass("none").toggleClass("pop-up");
+        $('input[name=password-confirm]').parent().toggleClass("none").toggleClass("pop-up");
+        $ele.toggleClass("active").toggleClass("col-3").toggleClass("col-9");
+        $sibling.toggleClass("active").toggleClass("col-3").toggleClass("col-9")
+
+    });
+
+    $('input').on('focus blur', function (e) {
+        e.preventDefault();
+        var prevType = $(this).data("prevType");
+
+        if (prevType !== e.type) {   //  reduce double fire issues
+            switch (e.type) {
+                case "blur":
+                    $(this).parent().removeClass('active');
+                    break;
+                case "focus":
+                    $('form fieldset').removeClass('active');
+                    $(this).parent().addClass('active');
+                    break;
+            }
+        }
+
+        $(this).data("prevType", e.type);
+
+    });
+
+    $("fieldset.submit.button").on('click', function (e) {
+        e.preventDefault();
+        // $(this).find('input[type=submit]')[0].click();
+        $(this).parent().submit();
+    });
+
+
+</script>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
