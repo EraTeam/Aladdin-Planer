@@ -9,17 +9,12 @@ def success(name):
     return "Herzlich Willkommen %s" % name
 
 
-@app.route("/failure/<name>")
-def failure(name):
-    return "Anmeldung für %s fehlgeschlagen, bitte erneut versuchen." % name
-
-
 @app.route("/")
 def index():
     return render_template('index.html', siteTitle="Aladdin Planer!", greetMessage="Willkommen ", userName="Hannelore Heftig", locationMessage=", hier ist deine Übersicht!")
 
 
-@app.route("/login-req", methods=["POST", "GET"])
+@app.route("/login", methods=["POST", "GET"])
 def login_request():
     if request.method == "POST":
         user = request.form["username"]
@@ -38,9 +33,9 @@ def login():
 
 def validation(username, password):
     if username == "admin" and password == "secret":
-        return redirect(url_for("success", name=username))
+        return redirect(url_for("index", userName=username))
     else:
-        return render_template("index.html", error="invalid credentials")
+        return render_template("login.html", error="invalid credentials")
 
 
 if __name__ == '__main__':

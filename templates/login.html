@@ -54,9 +54,8 @@
         </div>
     </div>
 
-    <form action="http://localhost:5000/login-req" method="POST">
-
-        <fieldset class="username">
+    <form action="/login" method="POST">
+            <fieldset class="username">
             <div class="icon left"><i class="fa fa-user"></i></div>
             <input type="text" name="username" placeholder="Username"/>
         </fieldset>
@@ -78,7 +77,7 @@
         </fieldset>
         <fieldset class="submit button">
             <p>Log In</p>
-            <input type="submit" name="submit" placeholder="Submit"/>
+            <input class="none" type="submit" name="submit" placeholder="Submit"/>
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
     </form>
@@ -122,10 +121,8 @@
 
     });
 
-    $("fieldset.submit.button").on('click', function (e) {
-        e.preventDefault();
-        // $(this).find('input[type=submit]')[0].click();
-        $(this).parent().submit();
+   $("form .submit.button").on('click', function (e) {
+         $(this).find('input[type=submit]')[0].click();
     });
 
 
