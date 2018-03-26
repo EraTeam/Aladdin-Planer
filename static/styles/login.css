@@ -21,7 +21,8 @@ body.error fieldset {
 }
 
 #login form {
-    background: #ac3a31;
+    /*background: #ac3a31;*/
+    background: #6b7bd8;
     box-shadow: 0 10px 20px #8a8a8a;
         padding: 2em 0;
 
@@ -60,7 +61,20 @@ body.error fieldset {
 
 #login .row h4 {
     margin-bottom: 0;
-    cursor: pointer;
+    cursor:default;
 }
 
+#login .register {
+    position: absolute;
+    left: 10%;
+    color: #2b3361;
+    bottom: 5%;
+    font-weight: 800;
+}
 
+#login .forgot-password {
+    font-weight: 800;
+    bottom: 5%;
+    right: 10%;
+    position: absolute;
+}

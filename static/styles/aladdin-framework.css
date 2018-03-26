@@ -61,7 +61,7 @@ form fieldset.submit.button {
 }
 
 form fieldset.submit.button:hover {
-    box-shadow: 0 8px 10px #82322c;
+    box-shadow: 0 8px 10px #4b5488;
     transform: translateY(-1px);
 }
 
@@ -77,7 +77,7 @@ form fieldset.submit.button p {
 form fieldset.active,
 .button.active
 {
-    box-shadow: 0 8px 10px #82322c;
+    box-shadow: 0 8px 10px #4b5488;
     transform: translateY(-1px);
 }
 
@@ -138,3 +138,9 @@ form fieldset .icon.button:hover {
         transform: rotate(3deg);
     }
 }
+.color-1 {color: #6bd8c8;}
+.color-2 {color: #6bb2d8;}
+.main {color: #6b7bd8;}
+.color-4 {color: #6e38bb;}
+.color-5 {color: #c86bd8;}
+.color-6 {color: #85386f;}
