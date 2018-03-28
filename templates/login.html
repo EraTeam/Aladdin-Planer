@@ -19,36 +19,7 @@
         </div>
     </div>
 
-        <form action="/login" method="POST">
-            <fieldset class="username">
-            <div class="icon left"><i class="fa fa-user"></i></div>
-            <input type="text" name="username" placeholder="Username"/>
-        </fieldset>
-        <fieldset class="email none">
-            <div class="icon left"><i class="fa fa-envelope"></i></div>
-            <input type="mail" name="email" placeholder="Email"/>
-        </fieldset>
-        <fieldset class="email none">
-            <div class="icon left"><i class="fa fa-envelope"></i></div>
-            <input type="mail" name="email-confirm" placeholder="Confirm Email"/>
-        </fieldset>
-        <fieldset class="password">
-            <div class="icon left"><i class="fa fa-lock"></i></div>
-            <input type="password" name="password" placeholder="Password"/>
-        </fieldset>
-        <fieldset class="password none">
-            <div class="icon left"><i class="fa fa-lock"></i></div>
-            <input type="password" name="password-confirm" placeholder="Confirm Password"/>
-        </fieldset>
-        <fieldset class="submit button">
-            <p>Log In</p>
-            <input class="none" type="submit" name="submit" placeholder="Submit"/>
-            <div class="icon right button"><i class="arrow"></i></div>
-        </fieldset>
-        <div class="register">No account yet? <a href="javascript:void(0)">Register here!</a></div>
-        <div class="forgot-password"><a href="javascript:void(0)">Forgot password</a></div>
-    </form>
-
+    {% block login_register_form %}{% endblock %}
 </div>
     </div>
 
