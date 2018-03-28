@@ -6,9 +6,33 @@ body.error fieldset {
 
 /* LOGIN FORM CONTAINER */
 #login.container {
-    width: 30%;
+    /*width: 30%;*/
     margin: 15vh auto;
 }
+@media (min-width: 400px) {
+    #login.container {
+        width: 85%;
+        padding: 0;
+    }
+}
+
+@media (min-width: 550px) {
+    #login.container {
+        width: 60%;
+    }
+}
+@media (min-width: 1000px){
+    #login.container {
+        width: 45%;
+    }
+}
+
+@media (min-width: 1200px) {
+    #login.container {
+    width: 30%;
+}
+}
+
 
 #login .form-box {
     border: 1px solid transparent;
@@ -68,13 +92,13 @@ body.error fieldset {
     position: absolute;
     left: 10%;
     color: #2b3361;
-    bottom: 5%;
+    bottom: 1vh;
     font-weight: 800;
 }
 
 #login .forgot-password {
     font-weight: 800;
-    bottom: 5%;
+    bottom: 1vh;
     right: 10%;
     position: absolute;
 }
