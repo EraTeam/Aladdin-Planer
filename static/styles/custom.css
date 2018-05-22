@@ -1,0 +1,16 @@
+/* Tablet Or Below */
+@media only screen and (max-width: 991px) {
+    .welcome-message {
+        display: block;
+    }
+}
+
+/* Mobile view (Default) */
+@media only screen and (max-width: 767px) {
+    .welcome-message {
+        display: none;
+    }
+}
+
+
+

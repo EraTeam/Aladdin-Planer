@@ -19,70 +19,187 @@
 
     <!-- CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
-    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/normalize.min.css') }}">-->
-    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/skeleton.min.css') }}">-->
-    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/card.min.css') }}">-->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/normalize.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/skeleton.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/card.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/semantic/semantic.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/custom.css') }}">
+
 
     <!-- Favicon
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
+    <!-- Javascript
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="{{ url_for('static', filename='javascript/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/semantic/semantic.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/semantic/less.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/semantic/highlight.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/semantic/docs.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/semantic/sidebar.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/semantic/widgets.js') }}"></script>
+
+
 </head>
 <body>
+<div class="ui vertical sidebar menu left" id="toc" style="z-index: 999">
+    <div class="item">
+        <div class="header">Test Topic</div>
+        <div class="menu">
+            <a href="#" class="item" title="Test Link&nbsp;&#8594;">Test Link</a>
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+    body {
+        background-color: #FFFFFF;
+    }
+
+    .ui.menu .item img.logo {
+        margin-right: 1.5em;
+    }
+
+    .main.container {
+        margin-top: 7em;
+    }
+
+    .wireframe {
+        margin-top: 2em;
+    }
+
+    .ui.footer.segment {
+        margin: 5em 0em 0em;
+        padding: 5em 0em;
+    }
+</style>
 
 <!-- Primary Page Layout
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-<section class="header">
-    <div class="container">
-        <h5 class="header-message">{{ greetMessage }}{{ userName }}{{ locationMessage }}</h5>
-    </div>
-</section>
+<div class="ui fixed inverted main menu">
 
-<div class="container">
-    <div class="row" style="margin-top: 10%">
-        <div class="col-4 column task-card-box">
-            <div class="task-card">
-                <h4>Beispiel Karte</h4>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                    labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-                    et
-                    ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                    et
-                    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-                    rebum.
-                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+    <!--Header-->
+    <div class="ui container">
+        <!--Menu Icon-->
+        <!--<div class="left menu">-->
+        <a class="launch icon item" title="Menu Toggle Button&nbsp;&#8614;">
+            <i class="content icon"></i>
+        </a>
+
+        <!-- User Message -->
+        <span href="#" class="header item" title="User Welcome">
+                <img class="logo"
+                     src="{{ url_for('static',filename='styles/semantic/assets/images/default_profile_pic.png') }}"
+                     alt="Default Profile Image"
+                />
+                <span class="welcome-message">Willkommen zurück,</span>
+                &nbsp;
+                <span class="user-name">Albert Ampel</span>
+            </span>
+
+        <div class="ui secondary menu right">
+            <a href="#" class="ui active item" title="Dashboard&nbsp;&#8635;">Dashboard</a>
+
+            <div class="ui simple dropdown item">
+                Dropdown <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a class="item" href="#">Link Item</a>
+                    <a class="item" href="#">Link Item</a>
+                    <div class="divider"></div>
+                    <div class="header">Header Item</div>
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        Sub Menu
+                        <div class="menu">
+                            <a class="item" href="#">Link Item</a>
+                            <a class="item" href="#">Link Item</a>
+                        </div>
+                    </div>
+                    <a class="item" href="#">Link Item</a>
+                </div>
             </div>
         </div>
-        <div class="col-4 column task-card-box">
-            <div class="task-card">
-                <h4>Beispiel Karte</h4>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                    labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-                    et
-                    ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                    et
-                    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-                    rebum.
-                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+    </div>
+</div>
+
+
+<div class="ui main container">
+    <div class="ui three column doubling stackable grid container">
+        <div class="column">
+            <h4 class="ui top attached block header">
+                Beispiel Karte
+            </h4>
+            <div class="ui bottom attached segment">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+                et
+                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                et
+                dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+                rebum.
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
             </div>
         </div>
-        <div class="col-4 column task-card-box">
-            <div class="task-card">
-                <h4>Beispiel Karte</h4>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                    labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-                    et
-                    ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                    et
-                    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-                    rebum.
-                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        <div class="column">
+            <h4 class="ui top attached block header">
+                Beispiel Karte
+            </h4>
+            <div class="ui bottom attached segment">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+                et
+                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                et
+                dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+                rebum.
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </div>
+        </div>
+        <div class="column">
+            <h4 class="ui top attached block header">
+                Beispiel Karte
+            </h4>
+            <div class="ui bottom attached segment">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+                et
+                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                et
+                dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+                rebum.
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </div>
+        </div>
+        <div class="column">
+            <h4 class="ui top attached block header">
+                Beispiel Karte
+            </h4>
+            <div class="ui bottom attached segment">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+                et
+                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                et
+                dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+                rebum.
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </div>
+        </div>
+        <div class="column">
+            <h4 class="ui top attached block header">
+                Beispiel Karte
+            </h4>
+            <div class="ui bottom attached segment">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+                et
+                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                et
+                dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+                rebum.
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
             </div>
         </div>
     </div>
