@@ -1,5 +1,13 @@
 from flask import Flask
-from flask import render_template, request, url_for, redirect
+from flask import render_template, request, url_for, redirect, session
+
+
+import sys
+sys.path.append("/home/kian/schule/dev/aladdin-planer/Aladdin-Planer")
+
+import database
+
+
 
 app = Flask(__name__)
 
@@ -11,7 +19,12 @@ def success(name):
 
 @app.route("/")
 def index():
-    return render_template('index.html', siteTitle="Aladdin Planer!", greetMessage="Willkommen ", userName="Hannelore Heftig", locationMessage=", hier ist deine Übersicht!")
+
+    if session.get('hash'):
+        return render_template('index.html', siteTitle="Aladdin Planer!", greetMessage="Willkommen ", userName="Hannelore Heftig", locationMessage=", hier ist deine Übersicht!")
+    else:
+        return redirect("/login", code=302)
+
 
 
 @app.route("/login_request", methods=["POST", "GET"])
@@ -19,23 +32,42 @@ def login_request():
     if request.method == "POST":
         user = request.form["username"]
         password = request.form["password"]
-        return validation(username=user, password=password)
-    else:
-        user = request.args.get("username")
-        password = request.args.get("password")
-        return validation(username=user, password=password)
+        
+        if user != "" and password != "":
+            verifyUser = database.get_registered_user(user, password)
+
+            if verifyUser is False:
+                return "user does not exist"
+            else:
+                return "user exist"
+
+        else:
+            return "login failed, not every field was filled!"
+  
 
 
-@app.route("/register_request", methods=["POST", "GET"])
+@app.route("/register_request", methods=["POST"])
 def register_request():
     if request.method == "POST":
         user = request.form["username"]
         password = request.form["password"]
-        return validation(username=user, password=password)
+        email = request.form["email"]
+
+        if user != "" and password != "" and email != "":
+
+            insert = database.insert_new_user(user, password, email)
+
+            if insert is True:
+               return redirect("/login", code=302)
+            else:
+                return redirect("/register", code=302)
+
+        else:
+            return redirect("/register", code=302)
+
+
     else:
-        user = request.args.get("username")
-        password = request.args.get("password")
-        return validation(username=user, password=password)
+        return redirect("/register", code=302)
 
 
 @app.route("/login")
