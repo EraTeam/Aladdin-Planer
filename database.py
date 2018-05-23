@@ -32,7 +32,7 @@ def get_registered_user(username, password):
     conn = connect_db()
 
     cur = conn.cursor()
-    cur.execute("SELECT userHash FROM users WHERE username=? AND password=?", (username, password))
+    cur.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
     conn.commit()
     rows = cur.fetchall()
 

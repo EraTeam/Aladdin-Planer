@@ -10,7 +10,8 @@ import database
 
 
 app = Flask(__name__)
-
+app.secret_key = 'super secret key'
+app.config['SESSION_TYPE'] = 'filesystem'
 
 @app.route("/success/<name>")
 def success(name):
@@ -39,7 +40,8 @@ def login_request():
             if verifyUser is False:
                 return "user does not exist"
             else:
-                return "user exist"
+                session['hash'] = verifyUser[0][3]
+                return redirect("/", code=302)
 
         else:
             return "login failed, not every field was filled!"
@@ -55,7 +57,7 @@ def register_request():
 
         if user != "" and password != "" and email != "":
 
-            insert = database.insert_new_user(user, password, email)
+            insert = database.insert_new_user(user, email, password)
 
             if insert is True:
                return redirect("/login", code=302)
@@ -68,6 +70,16 @@ def register_request():
 
     else:
         return redirect("/register", code=302)
+
+
+@app.route("/logout")
+def logout():
+    if session.get('hash'):
+        session.pop('hash', None)
+        return redirect("/", code=302)
+    else:
+        return redirect("/", code=302)
+
 
 
 @app.route("/login")
@@ -88,5 +100,6 @@ def validation(username, password):
 
 
 if __name__ == '__main__':
+
     app.debug(1)
     app.run()
