@@ -1,0 +1,72 @@
+{% extends "head.html" %}
+{% block body %}
+<body>
+
+<!-- Primary Page Layout
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+<div id="login" class="container">
+
+    <div class="form-box">
+
+    <div class="row">
+        <h4>Welcome to the next generation Task planner!</h4>
+        <div class="none column col-9 button active">
+            <h4>Log In</h4>
+        </div>
+        <div class="none column col-3 button">
+            <h4>Register</h4>
+        </div>
+    </div>
+
+    {% block login_register_form %}{% endblock %}
+</div>
+    </div>
+
+
+<script type="text/javascript">
+
+    $('.form-box .row .button').on('click', function (e) {
+        e.preventDefault();
+        var $ele = $(this);
+        var $sibling = $(this).siblings();
+
+        $('input[name=email]').parent().toggleClass("none").toggleClass("pop-up");
+        $('input[name=email-confirm]').parent().toggleClass("none").toggleClass("pop-up");
+        $('input[name=password-confirm]').parent().toggleClass("none").toggleClass("pop-up");
+        $ele.toggleClass("active").toggleClass("col-3").toggleClass("col-9");
+        $sibling.toggleClass("active").toggleClass("col-3").toggleClass("col-9")
+
+    });
+
+    $('input').on('focus blur', function (e) {
+        e.preventDefault();
+        var prevType = $(this).data("prevType");
+
+        if (prevType !== e.type) {   //  reduce double fire issues
+            switch (e.type) {
+                case "blur":
+                    $(this).parent().removeClass('active');
+                    break;
+                case "focus":
+                    $('form fieldset').removeClass('active');
+                    $(this).parent().addClass('active');
+                    break;
+            }
+        }
+
+        $(this).data("prevType", e.type);
+
+    });
+
+   $("form .submit.button").on('click', function (e) {
+         $(this).find('input[type=submit]')[0].click();
+    });
+
+
+</script>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+{% endblock %}

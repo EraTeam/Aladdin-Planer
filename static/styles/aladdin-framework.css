@@ -1,0 +1,146 @@
+/* ----------- GENERAL ----------- */
+.none {
+    display: none;
+}
+.none-o {
+    opacity: 0;
+}
+.pop-up {
+    animation: pop-up 0.5s ease-out 0.2s;
+}
+
+/* ----------- BASIC BUTTON ----------- */
+.button {
+    background: #fff;
+    border-radius: 3px;
+    transition: all 0.4s ease-in-out;
+    box-sizing: border-box;
+    border: none;
+        padding: .5em;
+}
+
+/* ----------- FORM ----------- */
+form {
+    position: relative;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+form fieldset {
+        position: relative;
+    background: white;
+    border-radius: 3px;
+    transition: all 0.4s ease-in-out;
+    box-sizing: border-box;
+    border: none;
+    margin: 1em auto;
+    padding: .5em;
+}
+
+form fieldset input, form fieldset p {
+    display: inline-block;
+    margin-left: 50px;
+    color: #333333;
+    font-size: 16px;
+    letter-spacing: 1px;
+    height: 100%;
+    line-height: 45px;
+}
+
+form fieldset input {
+    border: none;
+    outline: none;
+    width: 80%;
+    margin: 0 0 0 2.45em;
+    /* margin: 0; */
+}
+
+/* FORM SUBMIT BUTTON */
+form fieldset.submit.button {
+    cursor: pointer;
+}
+
+form fieldset.submit.button:hover {
+    box-shadow: 0 8px 10px #4b5488;
+    transform: translateY(-1px);
+}
+
+form fieldset.submit.button p {
+    text-align: center;
+    display: block;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+
+/* FORM ACTIVE ITEM */
+form fieldset.active,
+.button.active
+{
+    box-shadow: 0 8px 10px #4b5488;
+    transform: translateY(-1px);
+}
+
+/* FORM ICON */
+
+form fieldset .icon {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 15px;
+    transition: all 0.4s ease;
+}
+
+form fieldset .icon i {
+    position: absolute;
+    display: block;
+}
+
+form fieldset .icon.left {
+    left: 10px;
+}
+
+form fieldset .icon.right {
+    right: 10px;
+    cursor: pointer;
+}
+
+form fieldset .icon.button:hover {
+    background: #f2f2f2;
+    border-radius: 3px;
+    transition: all 0.4s ease;
+}
+
+
+/* ----------- ANIMATIONS ----------- */
+@keyframes pop-up {
+    0% {
+        opacity: 0;
+        transform: scale(0.2);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes error {
+    0%, 50%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-3deg);
+    }
+    75% {
+        transform: rotate(3deg);
+    }
+}
+.color-1 {color: #6bd8c8;}
+.color-2 {color: #6bb2d8;}
+.main {color: #6b7bd8;}
+.color-4 {color: #6e38bb;}
+.color-5 {color: #c86bd8;}
+.color-6 {color: #85386f;}
