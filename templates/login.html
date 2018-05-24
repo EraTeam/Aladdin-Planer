@@ -1,56 +1,14 @@
 {% extends "head.html" %}
 {% block body %}
 <body>
-<script>
-  $(document)
-    .ready(function() {
-      $('.ui.form')
-        .form({
-          fields: {
-            username: {
-              identifier  : 'username',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your username'
-                }
-              ]
-            },
-            password: {
-              identifier  : 'password',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your password'
-                },
-                {
-                  type   : 'length[2]',
-                  prompt : 'Your password must be at least 2 characters'
-                }
-              ]
-            }
-          }
-        })
-      ;
-    })
-  ;
-  </script>
 
 <!-- Primary Page Layout
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <div class="ui middle aligned center aligned grid" style="height: 100%;">
   <div class="column" style="width: 30rem;">
-    <h2 class="ui teal image header">
-      <div class="content">
-        Log-in to your account
-      </div>
-    </h2>
 
       {% block login_register_form %}{% endblock %}
 
-    <div class="ui message">
-      New to us? <a href="/register">Sign Up</a>
-    </div>
   </div>
 </div>
 
