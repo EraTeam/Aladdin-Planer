@@ -8,10 +8,10 @@ sys.path.append("/home/levent/PycharmProjects/Aladdin-Planer-2/")
 import database
 
 
-
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 app.config['SESSION_TYPE'] = 'filesystem'
+
 
 @app.route("/success/<name>")
 def success(name):
@@ -25,7 +25,6 @@ def index():
         return render_template('index.html', siteTitle="Aladdin Planer!", greetMessage="Willkommen ", userName="Hannelore Heftig", locationMessage=", hier ist deine Übersicht!")
     else:
         return redirect("/login", code=302)
-
 
 
 @app.route("/login_request", methods=["POST", "GET"])
@@ -46,7 +45,6 @@ def login_request():
         else:
             return "login failed, not every field was filled!"
   
-
 
 @app.route("/register_request", methods=["POST"])
 def register_request():
@@ -79,7 +77,6 @@ def logout():
         return redirect("/", code=302)
     else:
         return redirect("/", code=302)
-
 
 
 @app.route("/login")
