@@ -1,0 +1,27 @@
+.main.container {
+    margin-top: 7em;
+}
+
+i.icon.right {
+    float: right !important;
+}
+i.icon.left {
+    float: left;
+}
+
+/* Tablet Or Below */
+@media only screen and (max-width: 991px) {
+    .welcome-message {
+        display: block;
+    }
+}
+
+/* Mobile view (Default) */
+@media only screen and (max-width: 767px) {
+    .welcome-message {
+        display: none;
+    }
+}
+
+
+
