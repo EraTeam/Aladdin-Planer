@@ -1,20 +1,23 @@
 {% extends "login.html" %}
 {% block login_register_form %}
-<form action="/login_request" method="POST">
-    <fieldset class="username">
-        <div class="icon left"><i class="fa fa-user"></i></div>
-        <input type="text" name="username" placeholder="Username"/>
-    </fieldset>
-    <fieldset class="password">
-        <div class="icon left"><i class="fa fa-lock"></i></div>
-        <input type="password" name="password" placeholder="Password"/>
-    </fieldset>
-    <fieldset class="submit button">
-        <p>Log In</p>
-        <input class="none" type="submit" name="submit" placeholder="Submit"/>
-        <div class="icon right button"><i class="arrow"></i></div>
-    </fieldset>
-    <div class="register">No account yet? <a href="/register">Register here!</a></div>
-    <div class="forgot-password"><a href="javascript:void(0)">Forgot password</a></div>
-</form>
+
+    <form action="/login_request" method="POST" class="ui large form">
+        <div class="ui stacked segment">
+            <div class="field">
+                <div class="ui left icon input">
+                    <i class="user icon"></i>
+                    <input type="text" name="username" placeholder="Username">
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui left icon input">
+                    <i class="lock icon"></i>
+                    <input type="password" name="password" placeholder="Password">
+                </div>
+            </div>
+            <div class="ui fluid large teal submit button">Login</div>
+        </div>
+        <div class="ui error message"></div>
+    </form>
+
 {% endblock %}
