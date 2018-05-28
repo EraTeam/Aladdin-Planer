@@ -6,7 +6,7 @@ import sys
 sys.path.append("/home/kian/schule/dev/aladdin-planer/Aladdin-Planer")
 
 import database
-
+import dashboard
 
 
 app = Flask(__name__)
@@ -22,7 +22,16 @@ def success(name):
 def index():
 
     if session.get('hash'):
-        return render_template('index.html', siteTitle="Aladdin Planer!", greetMessage="Willkommen ", userName="Hannelore Heftig", locationMessage=", hier ist deine Übersicht!")
+
+        if(database.verifyUserHash(session.get('hash'))):
+
+            return render_template('index.html', siteTitle="Aladdin Planer!", greetMessage="Willkommen ", userName="Hannelore Heftig", locationMessage=", hier ist deine Übersicht!")
+
+        else:
+            session.pop('hash', None)
+            return redirect("/login", code=302)    
+
+
     else:
         return redirect("/login", code=302)
 
@@ -30,46 +39,52 @@ def index():
 
 @app.route("/login_request", methods=["POST", "GET"])
 def login_request():
-    if request.method == "POST":
-        user = request.form["username"]
-        password = request.form["password"]
-        
-        if user != "" and password != "":
-            verifyUser = database.get_registered_user(user, password)
+    if session.get('hash'):
+        return redirect("/", code=302)
+    else:    
+        if request.method == "POST":
+            user = request.form["username"]
+            password = request.form["password"]
+            
+            if user != "" and password != "":
+                verifyUser = database.get_registered_user(user, password)
 
-            if verifyUser is False:
-                return "user does not exist"
+                if verifyUser is False:
+                    return "user does not exist"
+                else:
+                    session['hash'] = verifyUser[0][3]
+                    return redirect("/", code=302)
+
             else:
-                session['hash'] = verifyUser[0][3]
-                return redirect("/", code=302)
-
-        else:
-            return "login failed, not every field was filled!"
-  
+                return "login failed, not every field was filled!"
+    
 
 
 @app.route("/register_request", methods=["POST"])
 def register_request():
-    if request.method == "POST":
-        user = request.form["username"]
-        password = request.form["password"]
-        email = request.form["email"]
+    if session.get('hash'):
+        return redirect("/", code=302)
+    else:
+        if request.method == "POST":
+            user = request.form["username"]
+            password = request.form["password"]
+            email = request.form["email"]
 
-        if user != "" and password != "" and email != "":
+            if user != "" and password != "" and email != "":
 
-            insert = database.insert_new_user(user, email, password)
+                insert = database.insert_new_user(user, email, password)
 
-            if insert is True:
-               return redirect("/login", code=302)
+                if insert is True:
+                    return redirect("/login", code=302)
+                else:
+                    return redirect("/register", code=302)
+
             else:
                 return redirect("/register", code=302)
 
+
         else:
             return redirect("/register", code=302)
-
-
-    else:
-        return redirect("/register", code=302)
 
 
 @app.route("/logout")
@@ -84,12 +99,18 @@ def logout():
 
 @app.route("/login")
 def login():
-    return render_template('login_form.html')
+    if session.get('hash'):
+        return redirect("/", code=302)
+    else:
+        return render_template('login_form.html')
 
 
 @app.route("/register")
 def register():
-    return render_template('register_form.html')
+    if session.get('hash'):
+        return redirect("/", code=302)
+    else:
+        return render_template('register_form.html')
 
 
 def validation(username, password):

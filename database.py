@@ -36,9 +36,20 @@ def get_registered_user(username, password):
     conn.commit()
     rows = cur.fetchall()
 
-    print(rows)
-
     if not rows:
         return False
     else:
         return rows
+
+
+def verifyUserHash(hash):
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM users WHERE userHash=?", (hash, ))    
+    conn.commit()
+    rows = cur.fetchall()
+
+    if not rows:
+        return False
+    else:
+        return True
