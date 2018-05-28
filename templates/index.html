@@ -1,42 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <!-- Basic Page Needs
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <meta charset="utf-8">
-    <title>{{ siteTitle }}</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Mobile Specific Metas
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- FONT
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
-    <!-- CSS
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/semantic/semantic.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/custom.css') }}">
-
-
-    <!-- Favicon
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-    <!-- Javascript
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script src="{{ url_for('static', filename='javascript/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='javascript/semantic/semantic.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='javascript/semantic/less.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='javascript/semantic/highlight.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='javascript/semantic/docs.js') }}"></script>
-    <script src="{{ url_for('static', filename='javascript/semantic/sidebar.js') }}"></script>
-    <script src="{{ url_for('static', filename='javascript/semantic/widgets.js') }}"></script>
-
-
+{% extends "head.html" %}
+{% block body %}
 </head>
 <body>
 <div class="ui vertical sidebar menu left" id="toc" style="z-index: 999">
@@ -89,7 +52,7 @@
                 />
                 <span class="welcome-message">Willkommen zurück,</span>
                 &nbsp;
-                <span class="user-name">{{ userName }}</span>
+                <span class="user-name">Albert Ampel</span>
             </span>
 
         <div class="ui secondary menu right">
@@ -98,7 +61,7 @@
             <div class="ui simple dropdown item">
                 Dropdown <i class="dropdown icon"></i>
                 <div class="menu" style="margin-top: 0;">
-                    <a class="item" href="/logout">Logout <i class="power off icon right"></i></a>
+                    <a class="item" href="#">Logout <i class="power off icon right"></i></a>
                     <a class="item" href="#">Link Item</a>
                     <div class="divider"></div>
                     <div class="header">Header Item</div>
@@ -130,4 +93,4 @@
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
-</html>
+{% endblock %}

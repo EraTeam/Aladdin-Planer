@@ -3,15 +3,16 @@ from flask import render_template, request, url_for, redirect, session
 
 
 import sys
-sys.path.append("/home/kian/schule/dev/aladdin-planer/Aladdin-Planer")
+#sys.path.append("/home/levent/PycharmProjects/Aladdin-Planer-2/")
+sys.path.append("/home/kian/schule/dev/aladdin-planer/Aladdin-Planer/")
 
 import database
 import dashboard
 
-
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 app.config['SESSION_TYPE'] = 'filesystem'
+
 
 @app.route("/success/<name>")
 def success(name):
@@ -36,7 +37,6 @@ def index():
         return redirect("/login", code=302)
 
 
-
 @app.route("/login_request", methods=["POST", "GET"])
 def login_request():
     if session.get('hash'):
@@ -58,7 +58,6 @@ def login_request():
             else:
                 return "login failed, not every field was filled!"
     
-
 
 @app.route("/register_request", methods=["POST"])
 def register_request():
@@ -94,7 +93,6 @@ def logout():
         return redirect("/", code=302)
     else:
         return redirect("/", code=302)
-
 
 
 @app.route("/login")
