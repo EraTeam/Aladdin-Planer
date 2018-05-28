@@ -3,9 +3,10 @@ from flask import render_template, request, url_for, redirect, session
 
 
 import sys
-#sys.path.append("/home/levent/PycharmProjects/Aladdin-Planer-2/")
-sys.path.append("/home/kian/schule/dev/aladdin-planer/Aladdin-Planer/")
+sys.path.append("/home/levent/PycharmProjects/Aladdin-Planer-2/")
+# sys.path.append("/home/kian/schule/dev/aladdin-planer/Aladdin-Planer/")
 
+# @TODO: @theTruth777 Add comments
 import database
 import dashboard
 
