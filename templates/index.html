@@ -1,96 +1,141 @@
 {% extends "head.html" %}
 {% block body %}
-</head>
-<body>
-<div class="ui vertical sidebar menu left" id="toc" style="z-index: 999">
-    <div class="item">
-        <div class="header">Test Topic</div>
-        <div class="menu">
-            <a href="#" class="item" title="Test Link&nbsp;&#8594;">Test Link</a>
+    </head>
+    <body>
+    <div class="ui vertical sidebar menu left" id="toc" style="z-index: 999">
+        <div class="item">
+            <div class="header">Test Topic</div>
+            <div class="menu">
+                <a href="#" class="item" title="Test Link&nbsp;&#8594;">Test Link</a>
+            </div>
         </div>
     </div>
-</div>
 
-<style type="text/css">
-   body {
-        background-color: #FFFFFF;
-    }
+    <style type="text/css">
+        body {
+            background-color: #FFFFFF;
+        }
 
-    .ui.menu .item img.logo {
-        margin-right: 1.5em;
-    }
+        .ui.menu .item img.logo {
+            margin-right: 1.5em;
+        }
 
+        .wireframe {
+            margin-top: 2em;
+        }
 
+        .ui.footer.segment {
+            margin: 5em 0em 0em;
+            padding: 5em 0em;
+        }
+    </style>
 
-    .wireframe {
-        margin-top: 2em;
-    }
+    <!-- Primary Page Layout
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="ui fixed inverted main menu">
 
-    .ui.footer.segment {
-        margin: 5em 0em 0em;
-        padding: 5em 0em;
-    }
-</style>
+        <!--Header-->
+        <div class="ui container">
+            <!--Menu Icon-->
+            <!--<div class="left menu">-->
+            <a class="launch icon item" title="Menu Toggle Button&nbsp;&#8614;">
+                <i class="content icon"></i>
+            </a>
 
-<!-- Primary Page Layout
-–––––––––––––––––––––––––––––––––––––––––––––––––– -->
-<div class="ui fixed inverted main menu">
-
-    <!--Header-->
-    <div class="ui container">
-        <!--Menu Icon-->
-        <!--<div class="left menu">-->
-        <a class="launch icon item" title="Menu Toggle Button&nbsp;&#8614;">
-            <i class="content icon"></i>
-        </a>
-
-        <!-- User Message -->
-        <span href="#" class="header item" title="User Welcome">
+            <!-- User Message -->
+            <span href="#" class="header item" title="User Welcome">
                 <img class="logo"
                      src="{{ url_for('static',filename='styles/semantic/assets/images/default_profile_pic.png') }}"
                      alt="Default Profile Image"
                 />
-                <span class="welcome-message">Willkommen zurück,</span>
+                <span class="greet-message">{{ greetMessage }}</span>
                 &nbsp;
-                <span class="user-name">Albert Ampel</span>
+                <span class="user-name">{{ userName }}</span>
             </span>
 
-        <div class="ui secondary menu right">
-            <a href="#" class="ui active item" title="Dashboard&nbsp;&#8635;">Dashboard</a>
+            <div class="ui secondary menu right">
+                <a href="#" class="ui active item" title="{{ location }}&nbsp;&#8635;">{{ location }}</a>
 
-            <div class="ui simple dropdown item">
-                Dropdown <i class="dropdown icon"></i>
-                <div class="menu" style="margin-top: 0;">
-                    <a class="item" href="#">Logout <i class="power off icon right"></i></a>
-                    <a class="item" href="#">Link Item</a>
-                    <div class="divider"></div>
-                    <div class="header">Header Item</div>
-                    <div class="item">
-                        <i class="dropdown icon"></i>
-                        Sub Menu
-                        <div class="menu">
-                            <a class="item" href="#">Link Item</a>
-                            <a class="item" href="#">Link Item</a>
+                <div class="ui simple dropdown item">
+                    Dropdown <i class="dropdown icon"></i>
+                    <div class="menu" style="margin-top: 0;">
+                        <a class="item" href="/logout">Logout <i class="power off icon right"></i></a>
+                        <a class="item" href="#">Link Item</a>
+                        <div class="divider"></div>
+                        <div class="header">Header Item</div>
+                        <div class="item">
+                            <i class="dropdown icon"></i>
+                            Sub Menu
+                            <div class="menu">
+                                <a class="item" href="#">Link Item</a>
+                                <a class="item" href="#">Link Item</a>
+                            </div>
                         </div>
+                        <a class="item" href="#">Link Item</a>
                     </div>
-                    <a class="item" href="#">Link Item</a>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="ui main container">
-    <!--Card Block-->
-    <button class="ui primary button">
-        Create new project
-      </button>
+    <div class="ui main container">
+        <!--Card Block-->
+        <button id="newProject" class="ui primary button">Create new project</button>
 
-      {{ activeProjects }}
+        <div class="ui modal">
+            <div class="header">Create a new project</div>
 
-</div>
+            <form action="/create_project" method="POST" class="ui form">
+                <div class="ui segment">
+                    <div class="field">
+                        <div class="ui left input" data-tooltip="Enter the projects title"
+                             data-position="left center">
+                            <input type="text" name="project_title" placeholder="Project Title">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Project Description</label>
+                        <textarea type="text" name="project_description" placeholder="Project Description"></textarea>
+                    </div>
+                    <div class="ui teal submit button">Submit</div>
+                    <div class="ui clear button">Clear</div>
+                    <div class="ui cancel button">Cancel</div>
+                    <div class="ui error message"></div>
+                </div>
 
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-</body>
+            </form>
+
+        </div>
+        {{ activeProjects }}
+
+    </div>
+
+    <!-- End Document
+      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+    <script>
+        $(document).ready(function () {
+            var $uiModal = $('.ui.modal');
+            $uiModal.modal('attach events', '#newProject', 'show');
+            $('.ui.cancel.button').on('click', function (ev) {
+                $(this).parent().parent().parent().modal('hide');
+            });
+            $('.ui.clear.button').on('click', function (ev) {
+                $(this).parent().parent().form('clear');
+            });
+            $('.ui.submit.button').on('click', function (ev) {
+                $(this).parent().parent().parent().modal('hide');
+            });
+
+            $('.ui.form').form({
+                    fields: {
+                        project_title: 'empty',
+                        project_description: 'empty'
+                    }
+                })
+            ;
+        });
+    </script>
+
+    </body>
 {% endblock %}
