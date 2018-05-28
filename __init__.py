@@ -25,7 +25,7 @@ def index():
 
         if(database.verifyUserHash(session.get('hash'))):
 
-            return render_template('index.html', siteTitle="Aladdin Planer!", greetMessage="Willkommen ", userName="Hannelore Heftig", locationMessage=", hier ist deine Übersicht!")
+            return dashboard.renderDashboard(session.get('hash'))
 
         else:
             session.pop('hash', None)

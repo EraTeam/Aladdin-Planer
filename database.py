@@ -53,3 +53,29 @@ def verifyUserHash(hash):
         return False
     else:
         return True
+
+
+def getUserInformation(hash):
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM users WHERE userHash=?", (hash, ))    
+    conn.commit()
+    rows = cur.fetchall()
+
+    if not rows:
+        return False
+    else:
+        return rows
+    
+
+def getActiveProjects():
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM projects")    
+    conn.commit()
+    rows = cur.fetchall()
+
+    if not rows:
+        return False
+    else:
+        return rows
