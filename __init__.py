@@ -3,8 +3,8 @@ from flask import render_template, request, url_for, redirect, session
 
 
 import sys
-sys.path.append("/home/levent/PycharmProjects/Aladdin-Planer-2/")
-# sys.path.append("/home/kian/schule/dev/aladdin-planer/Aladdin-Planer/")
+#sys.path.append("/home/levent/PycharmProjects/Aladdin-Planer-2/")
+sys.path.append("/home/kian/schule/dev/aladdin-planer/Aladdin-Planer/")
 
 # @TODO: @theTruth777 Add comments
 import database
@@ -117,6 +117,49 @@ def validation(username, password):
         return redirect(url_for("index", userName=username))
     else:
         return render_template("login.html", error="invalid credentials")
+
+
+#   Redirect user on /project call to index
+@app.route("/projects")
+def call_projects_page():
+    return redirect("/", code=302)
+
+
+# Is handling the call of an project page
+# @TODO: Create a project.py, create a global.py and put methods like hash validaten there to be called from
+# other methods!
+@app.route("/projects/<id>")
+def call_projects_page_valid(id):
+    if session.get('hash'):
+        
+        validate = database.validateProject(id)
+        if validate is True:
+            return "project exist"
+        else:
+            return "Project does not exist or is not active"
+    else:
+        return redirect("/", code=302)
+
+
+#   Create a new dashboard-project
+@app.route("/create_project", methods=['POST'])
+def create_project():
+    if session.get('hash'):
+
+        if request.method == "POST":
+            title = request.form["project_title"]
+            description = request.form["project_description"]
+
+            if title != "" and description != "":
+                database.createNewProject(title, description)
+                return redirect("/", code=302)
+            else:
+                return redirect("/", code=302)
+                
+        else:
+            return redirect("/", code=302)
+    else:
+        return redirect("/", code=302)        
 
 
 if __name__ == '__main__':

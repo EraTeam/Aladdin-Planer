@@ -71,7 +71,7 @@ def getUserInformation(hash):
 def getActiveProjects():
     conn = connect_db()
     cur = conn.cursor()
-    cur.execute("SELECT * FROM projects")    
+    cur.execute("SELECT rowid, * FROM projects")    
     conn.commit()
     rows = cur.fetchall()
 
@@ -79,3 +79,33 @@ def getActiveProjects():
         return False
     else:
         return rows
+
+
+def createNewProject(title, description):
+
+    now = datetime.datetime.now()
+    timestamp = now.strftime("%Y-%m-%d %H-%M")    
+
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute("INSERT INTO projects(active, title, description, date) VALUES(1, ?, ?, ?)", (title, description, timestamp))    
+    conn.commit()
+
+    return True
+
+
+
+def validateProject(id):
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute("SELECT rowid, active FROM projects WHERE rowid=?", (id, ))    
+    conn.commit()
+    rows = cur.fetchall()
+
+    if not rows:
+        return False
+    else:
+        if rows[0][0] is 1:
+            return True
+        else:
+            return False

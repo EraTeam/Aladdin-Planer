@@ -24,7 +24,8 @@ def getActiveProjects():
         returnHtml = []
 
         for row in getProjects:
-            returnHtml.append(row[0])
+            html = render_template("dashboard_project_cards.html", title=row[2], description=row[3], date=row[4], id=row[1])
+            returnHtml.append(html)
 
         returnVal = ''.join(returnHtml)
 
