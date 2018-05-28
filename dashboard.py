@@ -9,9 +9,10 @@ from flask import render_template, Markup
 
 """
 
+
 def getUserName(hash):
     username = database.getUserInformation(hash)
-    return username[0][0]
+    return username[0][0].title()
 
 
 def getActiveProjects():
@@ -29,5 +30,6 @@ def getActiveProjects():
 
         return returnVal
 
+
 def renderDashboard(hash):
-    return render_template('index.html', siteTitle="Aladdin Planer!", greetMessage="Willkommen ", userName=getUserName(hash), locationMessage=", hier ist deine Übersicht!", activeProjects=Markup(getActiveProjects()))
+    return render_template('index.html', greetMessage="Willkommen,", userName=getUserName(hash), location="Dashboard", activeProjects=Markup(getActiveProjects()))
