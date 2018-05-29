@@ -71,7 +71,7 @@ def getUserInformation(hash):
 def getActiveProjects():
     conn = connect_db()
     cur = conn.cursor()
-    cur.execute("SELECT rowid, * FROM projects")    
+    cur.execute("SELECT rowid, * FROM projects WHERE active = 1")
     conn.commit()
     rows = cur.fetchall()
 
@@ -88,7 +88,10 @@ def createNewProject(title, description):
 
     conn = connect_db()
     cur = conn.cursor()
-    cur.execute("INSERT INTO projects(active, title, description, date) VALUES(1, ?, ?, ?)", (title, description, timestamp))    
+    cur.execute(
+        "INSERT INTO projects(active, title, description, date) VALUES(1, ?, ?, ?)",
+        (title, description, timestamp)
+    )
     conn.commit()
 
     return True
@@ -105,7 +108,7 @@ def validateProject(id):
     if not rows:
         return False
     else:
-        if rows[0][0] is 1:
+        if rows[0][1] is 1:
             return True
         else:
             return False
