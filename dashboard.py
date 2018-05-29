@@ -15,7 +15,7 @@ def getUserName(hash):
     return username[0][0].title()
 
 
-def getActiveProjects():
+def getActiveProjectCards():
     getProjects = database.getActiveProjects()
 
     if getProjects is False:
@@ -24,7 +24,7 @@ def getActiveProjects():
         returnHtml = []
 
         for row in getProjects:
-            html = render_template("dashboard_project_cards.html", title=row[2], description=row[3], date=row[4], id=row[1])
+            html = render_template("project_cards.html", title=row[2], description=row[3], date=row[4], id=row[0])
             returnHtml.append(html)
 
         returnVal = ''.join(returnHtml)
@@ -32,5 +32,31 @@ def getActiveProjects():
         return returnVal
 
 
+def getActiveProjectLinks():
+    getProjects = database.getActiveProjects()
+
+    if getProjects is False:
+        return ""
+    else:
+        returnHtml = []
+        returnHtml.append('<div class="item"><div class="header">Projects</div><div class="menu">')
+
+        for row in getProjects:
+            html = '<a href="/projects/' + str(row[0]) + '" class="item" title="' + str(row[2]) + '">' + str(row[2]) + '</a>'
+            returnHtml.append(html)
+
+        returnHtml.append('</div></div>')
+        returnVal = ''.join(returnHtml)
+
+        return returnVal
+
+
 def renderDashboard(hash):
-    return render_template('index.html', greetMessage="Willkommen,", userName=getUserName(hash), location="Dashboard", activeProjects=Markup(getActiveProjects()))
+    return render_template(
+        'index.html',
+        greetMessage="Willkommen,",
+        userName=getUserName(hash),
+        location="Dashboard",
+        activeProjects=Markup(getActiveProjectCards()),
+        activeProjectLinks=Markup(getActiveProjectLinks())
+    )

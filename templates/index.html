@@ -3,12 +3,7 @@
     </head>
     <body>
     <div class="ui vertical sidebar menu left" id="toc" style="z-index: 999">
-        <div class="item">
-            <div class="header">Test Topic</div>
-            <div class="menu">
-                <a href="#" class="item" title="Test Link&nbsp;&#8594;">Test Link</a>
-            </div>
-        </div>
+        {{ activeProjectLinks }}
     </div>
 
     <style type="text/css">
@@ -128,12 +123,11 @@
             });
 
             $('.ui.form').form({
-                    fields: {
-                        project_title: 'empty',
-                        project_description: 'empty'
-                    }
-                })
-            ;
+                fields: {
+                    project_title: 'empty',
+                    project_description: 'empty'
+                }
+            });
         });
     </script>
 
