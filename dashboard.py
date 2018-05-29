@@ -19,7 +19,7 @@ def getActiveProjectCards():
     getProjects = database.getActiveProjects()
 
     if getProjects is False:
-        return "<br /><br /><big>There are currently no projects.</big>"
+        return "<div class='ui warning message'>There are currently no projects.</div>"
     else:
         returnHtml = []
 
