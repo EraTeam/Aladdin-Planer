@@ -121,6 +121,7 @@ def validation(username, password):
 
 #   Redirect user on /project call to index
 @app.route("/projects")
+@app.route("/projects/")
 def call_projects_page():
     return redirect("/", code=302)
 
