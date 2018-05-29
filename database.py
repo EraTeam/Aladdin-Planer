@@ -112,3 +112,16 @@ def validateProject(id):
             return True
         else:
             return False
+
+
+def getProjectCards(id):
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM projectCards WHERE projectId=?", (id, ))    
+    conn.commit()
+    rows = cur.fetchall()
+
+    if not rows:
+        return False
+    else:
+        return rows

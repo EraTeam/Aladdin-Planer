@@ -1,36 +1,18 @@
+"""
+    Util.PY - Utility
+    Provides several methods that are used throughout the application
+"""
+
+
 import database
-import util
 
 from flask import Flask
 from flask import render_template, Markup
-
-"""
-    Dashboard Class
-    is responsible for handling the dashboard frontend and dashboard application logic
-
-"""
 
 
 def getUserName(hash):
     username = database.getUserInformation(hash)
     return username[0][0].title()
-
-
-def getActiveProjectCards():
-    getProjects = database.getActiveProjects()
-
-    if getProjects is False:
-        return "<div class='ui warning message'>There are currently no projects.</div>"
-    else:
-        returnHtml = []
-
-        for row in getProjects:
-            html = render_template("project_cards.html", title=row[2], description=row[3], date=row[4], id=row[0])
-            returnHtml.append(html)
-
-        returnVal = ''.join(returnHtml)
-
-        return returnVal
 
 
 def getActiveProjectLinks():
@@ -52,5 +34,19 @@ def getActiveProjectLinks():
         return returnVal
 
 
-def renderDashboard(hash):
-    return util.prepareHtmlLayout(hash, getActiveProjectCards(), 0)
+
+def getHtmlModal(type):
+    if type is 0:
+        return render_template('create_project_modal.html')
+
+
+def prepareHtmlLayout(hash, htmlContent, type):
+    return render_template(
+        'index.html',
+        greetMessage="Willkommen,",
+        userName=getUserName(hash),
+        location="Dashboard",
+        templateModal=Markup(getHtmlModal(type)),
+        htmlMainContent=Markup(htmlContent),
+        activeProjectLinks=Markup(getActiveProjectLinks())
+    )

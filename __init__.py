@@ -1,15 +1,29 @@
+"""
+    __init__.py
+    Main .py file that is handling the application logic.
+    Is responsible for handling the routing and calling methods based on the rout.
+"""
+
+
+#   Flask modules
 from flask import Flask
 from flask import render_template, request, url_for, redirect, session
 
-
+#   Sys modul for our custom made moudls
+#   @TODO: wee need to find a workaround for that
 import sys
 #sys.path.append("/home/levent/PycharmProjects/Aladdin-Planer-2/")
 sys.path.append("/home/kian/schule/dev/aladdin-planer/Aladdin-Planer/")
 
-# @TODO: @theTruth777 Add comments
+#   Aladding planer modules
 import database
 import dashboard
+import projects
 
+
+#   Flask secret key
+#   NOTE: Change this key once you plan to put this application live. 
+#   This key is responsible for the session-value encryption.
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -20,6 +34,7 @@ def success(name):
     return "Herzlich Willkommen %s" % name
 
 
+#   Main route when the url is called
 @app.route("/")
 def index():
 
@@ -38,6 +53,8 @@ def index():
         return redirect("/login", code=302)
 
 
+#   Handling the request of a user login
+#   NOTE: This is NOT the /login url!
 @app.route("/login_request", methods=["POST", "GET"])
 def login_request():
     if session.get('hash'):
@@ -60,6 +77,8 @@ def login_request():
                 return "login failed, not every field was filled!"
     
 
+#   Handling the request of a user registration
+#   NOTE: This is NOT the /register url!
 @app.route("/register_request", methods=["POST"])
 def register_request():
     if session.get('hash'):
@@ -87,6 +106,7 @@ def register_request():
             return redirect("/register", code=302)
 
 
+#   Handling the logout and removing the session-cookie
 @app.route("/logout")
 def logout():
     if session.get('hash'):
@@ -96,6 +116,7 @@ def logout():
         return redirect("/", code=302)
 
 
+#   Handling the login and creating the session-cookie with the unique user hash
 @app.route("/login")
 def login():
     if session.get('hash'):
@@ -104,6 +125,7 @@ def login():
         return render_template('login_form.html')
 
 
+#   Display the /register html page
 @app.route("/register")
 def register():
     if session.get('hash'):
@@ -126,18 +148,21 @@ def call_projects_page():
     return redirect("/", code=302)
 
 
-# Is handling the call of an project page
-# @TODO: Create a project.py, create a global.py and put methods like hash validaten there to be called from
-# other methods!
+#   Handling the call on a /project/<id> page
 @app.route("/projects/<id>")
 def call_projects_page_valid(id):
+
     if session.get('hash'):
+
+        if(database.verifyUserHash(session.get('hash'))):
         
-        validate = database.validateProject(id)
-        if validate is True:
-            return "project exist"
+            validate = database.validateProject(id)
+            return projects.renderProjects(session.get('hash'), validate)
+
         else:
-            return "Project does not exist or is not active"
+            return redirect("/", code=302)
+            
+        
     else:
         return redirect("/", code=302)
 
