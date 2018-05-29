@@ -1,7 +1,8 @@
 import sqlite3
 from sqlite3 import Error
  
- 
+ #@TODO: Eine create.py zusammenfassen
+
 def create_connection(db_file):
 
     conn = sqlite3.connect(db_file)
