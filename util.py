@@ -34,10 +34,20 @@ def getActiveProjectLinks():
         return returnVal
 
 
-
 def getHtmlModal(type):
     if type is 0:
-        return render_template('create_project_modal.html')
+        fields = [
+            ["Enter the projects title", "input", "text", "project_title", "Project Title"],
+            ["Enter the projects description", "textarea", "text", "project_description", 'Project Description']
+        ]
+        return render_template('create_modal.html', headerText="Create a new project", actionPath="/create_project", formFields=fields)
+    elif type is 1:
+        fields = [
+            ["Enter the cards title", "input", "text", "card_title", "Card Title"],
+            ["Enter the cards description", "textarea", "text", "card_description", "Card Description"]
+        ]
+        return render_template('create_modal.html', headerText="Add a new card", actionPath="/add_card", formFields=fields)
+
 
 
 def prepareHtmlLayout(hash, htmlContent, type):

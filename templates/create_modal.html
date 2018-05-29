@@ -1,0 +1,23 @@
+<div class="ui modal">
+    <div class="header">{{ headerText }}</div>
+
+    <form action="{{ actionPath }}" method="POST" class="ui form">
+        <div class="ui segment">
+
+            {% for field in formFields %}
+                <div class="field">
+                    <div class="ui left input" data-tooltip="{{ field[0] }}" data-position="left center"></div>
+                    <{{ field[1] }} type="{{ field[2] }}" name="{{ field[3] }}" placeholder="{{ field[4] }}" ></{{ field[1] }}>
+                </div>
+
+            {% endfor %}
+
+            <div class="ui teal submit button">Submit</div>
+            <div class="ui clear button">Clear</div>
+            <div class="ui cancel button">Cancel</div>
+            <div class="ui error message"></div>
+        </div>
+
+    </form>
+
+</div>
