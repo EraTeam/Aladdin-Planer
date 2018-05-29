@@ -5,10 +5,6 @@ from flask import Flask
 from flask import render_template, Markup
 
 
-
-
-
-
 def verifyProjectState(verifyId):
     if verifyId is True:
 
@@ -17,10 +13,18 @@ def verifyProjectState(verifyId):
         getCards = database.getProjectCards(verifyId)
 
         if getCards is False:
-            return "<big>There are currenlty not cards in your project!</big>"
+            return "<div class='ui warning message'>There are currenlty no cards in your project.</div>"
         else:
             # @TODO: Create a method to parse the rows, method will be called here and returned
-            return "true"
+            returnHtml = []
+            returnHtml.append('<div class="ui three cards">')  # three cards container
+
+            returnHtml.append("<div class='ui success message'>There is something.</div>")
+
+            returnHtml.append('</div>')
+            returnVal = ''.join(returnHtml)
+
+            return returnVal
 
     else:
         htmlBody = "false"
@@ -29,6 +33,4 @@ def verifyProjectState(verifyId):
 
 
 def renderProjects(hash, verifyId):
-
-
-    return util.prepareHtmlLayout(hash, verifyProjectState(verifyId), 0)        
+    return util.prepareHtmlLayout(hash, verifyProjectState(verifyId), 1)

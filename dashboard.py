@@ -23,11 +23,13 @@ def getActiveProjectCards():
         return "<div class='ui warning message'>There are currently no projects.</div>"
     else:
         returnHtml = []
+        returnHtml.append('<div class="ui four cards">')  # four cards container
 
         for row in getProjects:
             html = render_template("project_cards.html", title=row[2], description=row[3], date=row[4], id=row[0])
             returnHtml.append(html)
 
+        returnHtml.append('</div>')
         returnVal = ''.join(returnHtml)
 
         return returnVal
