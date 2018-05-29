@@ -101,8 +101,12 @@
             </form>
 
         </div>
-        {{ activeProjects }}
+        <div class="ui cards">
+            {{ activeProjects }}
+            <script>
 
+            </script>
+        </div>
     </div>
 
     <!-- End Document
@@ -110,6 +114,23 @@
 
     <script>
         $(document).ready(function () {
+
+            {# ---- Timestamp reformatting ---- #}
+            $('.ui.time').each(function () {
+                var $dateField = $(this)[0];
+                var oldDate = $dateField.innerText.split(' ');
+                var _date = {
+                    'year': oldDate[0].split('-')[0].slice(-2),
+                    'month': oldDate[0].split('-')[1],
+                    'day': oldDate[0].split('-')[2],
+                    'hour': oldDate[1].split('-')[0],
+                    'minute': oldDate[1].split('-')[1]
+                };
+                $dateField.innerText = _date.hour + ':' + _date.minute + ' - '
+                    + _date.day + '.' + _date.month + '.' + _date.year;
+            });
+
+            {# ---- New Project Buttons ---- #}
             var $uiModal = $('.ui.modal');
             $uiModal.modal('attach events', '#newProject', 'show');
             $('.ui.cancel.button').on('click', function (ev) {
@@ -121,7 +142,7 @@
             $('.ui.submit.button').on('click', function (ev) {
                 $(this).parent().parent().parent().modal('hide');
             });
-
+            {# New Project Form definition #}
             $('.ui.form').form({
                 fields: {
                     project_title: 'empty',
