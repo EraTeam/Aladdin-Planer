@@ -66,6 +66,21 @@
                     }
                 }
             });
+            $(':input').on('change', function () {
+                let $value = $(this)[0].value;
+                if ($value === "" || $(this)[0].type === 'password') {
+                    return
+                }
+                $(this)[0].value = $value.replace(/^\s*/, '').replace(/\s*$/, '');
+            });
+
+            $('input[name="name"], input[name="surname"]').on('change', function () {
+                let $value = $(this)[0].value;
+                if ($value === "") {
+                    return
+                }
+                $(this)[0].value = $value.substr(0, 1).toUpperCase() + $value.substr(1);
+            });
         });
     </script>
 
