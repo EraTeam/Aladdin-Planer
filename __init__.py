@@ -19,6 +19,7 @@ sys.path.append("/home/kian/schule/dev/aladdin-planer/Aladdin-Planer/")
 import database
 import dashboard
 import projects
+import security
 
 
 #   Flask secret key
@@ -38,26 +39,23 @@ def success(name):
 @app.route("/")
 def index():
 
-    if session.get('hash'):
+    if security.verify_request():
 
-        if(database.verifyUserHash(session.get('hash'))):
-
-            return dashboard.renderDashboard(session.get('hash'))
-
-        else:
-            session.pop('hash', None)
-            return redirect("/login", code=302)    
-
+        return dashboard.renderDashboard(session.get('hash'))
 
     else:
-        return redirect("/login", code=302)
+        session.pop('hash', None)
+        return redirect("/login", code=302)    
+
+
 
 
 #   Handling the request of a user login
 #   NOTE: This is NOT the /login url!
 @app.route("/login_request", methods=["POST", "GET"])
 def login_request():
-    if session.get('hash'):
+
+    if security.verify_request():
         return redirect("/", code=302)
     else:    
         if request.method == "POST":
@@ -77,11 +75,13 @@ def login_request():
                 return "login failed, not every field was filled!"
     
 
+
 #   Handling the request of a user registration
 #   NOTE: This is NOT the /register url!
 @app.route("/register_request", methods=["POST"])
 def register_request():
-    if session.get('hash'):
+
+    if security.verify_request():
         return redirect("/", code=302)
     else:
         if request.method == "POST":
@@ -109,7 +109,7 @@ def register_request():
 #   Handling the logout and removing the session-cookie
 @app.route("/logout")
 def logout():
-    if session.get('hash'):
+    if security.verify_request():
         session.pop('hash', None)
         return redirect("/", code=302)
     else:
@@ -119,7 +119,7 @@ def logout():
 #   Handling the login and creating the session-cookie with the unique user hash
 @app.route("/login")
 def login():
-    if session.get('hash'):
+    if security.verify_request():
         return redirect("/", code=302)
     else:
         return render_template('login_form.html')
@@ -128,7 +128,7 @@ def login():
 #   Display the /register html page
 @app.route("/register")
 def register():
-    if session.get('hash'):
+    if security.verify_request():
         return redirect("/", code=302)
     else:
         return render_template('register_form.html')
@@ -152,19 +152,13 @@ def call_projects_page():
 @app.route("/projects/<id>")
 def call_projects_page_valid(id):
 
-    if session.get('hash'):
-
-        if(database.verifyUserHash(session.get('hash'))):
+    if security.verify_request():
            
             validate = database.validateProject(id)
             if validate is True:
                 return projects.renderProjects(session.get('hash'), validate, id)
             else:
-                return redirect("/", code=302)                
-
-        else:
-            return redirect("/", code=302)
-            
+                return redirect("/", code=302)
         
     else:
         return redirect("/", code=302)
@@ -173,25 +167,20 @@ def call_projects_page_valid(id):
 #   Create a new dashboard-project
 @app.route("/create_project", methods=['POST'])
 def create_project():
-    if session.get('hash'):
+    if security.verify_request():
 
-        if(database.verifyUserHash(session.get('hash'))):
+        if request.method == "POST":
+            title = request.form["project_title"]
+            description = request.form["project_description"]
 
-            if request.method == "POST":
-                title = request.form["project_title"]
-                description = request.form["project_description"]
-
-                if title != "" and description != "":
-                    database.createNewProject(title, description)
-                    return redirect("/", code=302)
-                else:
-                    return redirect("/", code=302)
-                    
+            if title != "" and description != "":
+                database.createNewProject(title, description)
+                return redirect("/", code=302)
             else:
                 return redirect("/", code=302)
+                
         else:
-            return redirect("/", code=302)
-            
+            return redirect("/", code=302)            
 
     else:
         return redirect("/", code=302)        
@@ -199,23 +188,21 @@ def create_project():
 
 @app.route("/add_card", methods=['POST'])
 def add_card():
-    if session.get('hash'):
+    if security.verify_request():
 
-        if(database.verifyUserHash(session.get('hash'))):
+        if request.method == "POST":
+            title = request.form["card_title"]
+            description = request.form["card_description"]
 
-            if request.method == "POST":
-                title = request.form["card_title"]
-                description = request.form["card_description"]
+            if title != "" and description != "":
+                getId = str(request.referrer).split("/")
+                database.createProjectCards(int(getId[4]), title, description) 
+                return redirect("/projects/" + getId[4], code=302)
 
-                if title != "" and description != "":
-                    getId = str(request.referrer).split("/")
-                    database.createProjectCards(int(getId[4]), title, description) 
-                    return redirect("/projects/" + getId[4], code=302)
-
-                else:
-                    return redirect("/", code=302)        
             else:
                 return redirect("/", code=302)        
+        else:
+            return redirect("/", code=302)        
                     
     else:
         return redirect("/", code=302)        
@@ -224,17 +211,11 @@ def add_card():
 
 @app.route("/profile")
 def profile_page():
-    if session.get('hash'):
-
-        if(database.verifyUserHash(session.get('hash'))):
-            return "profile page"
-
-        else:
-            return redirect("/", code=302)        
-
+    if security.verify_request():
+        return "user verify logged in"
     else:
-        return redirect("/", code=302)        
-        
+        return redirect("/", code=302)
+    
 
 
 
