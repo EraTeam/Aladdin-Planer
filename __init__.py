@@ -20,6 +20,7 @@ import database
 import dashboard
 import projects
 import security
+import profilepage
 
 
 #   Flask secret key
@@ -212,7 +213,8 @@ def add_card():
 @app.route("/profile")
 def profile_page():
     if security.verify_request():
-        return "user verify logged in"
+
+        return profilepage.renderProfile(session.get('hash'))
     else:
         return redirect("/", code=302)
     
