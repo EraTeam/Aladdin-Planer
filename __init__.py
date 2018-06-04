@@ -13,7 +13,8 @@ from flask import render_template, request, url_for, redirect, session
 #   @TODO: wee need to find a workaround for that
 import sys
 #sys.path.append("/home/levent/PycharmProjects/Aladdin-Planer-2/")
-sys.path.append("/home/kian/schule/dev/aladdin-planer/Aladdin-Planer/")
+#sys.path.append("/home/kian/schule/dev/aladdin-planer/Aladdin-Planer/")
+sys.path.append("/home/jan/PycharmProjects/Aladdin-Planer/")
 
 #   Aladding planer modules
 import database
@@ -63,13 +64,17 @@ def login_request():
             password = request.form["password"]
             
             if user != "" and password != "":
-                verifyUser = database.get_registered_user(user, password)
+                verifyUser = database.verifyUsername(user)
 
                 if verifyUser is False:
-                    return "user does not exist"
+                    return redirect("/register", code=302)
                 else:
-                    session['hash'] = verifyUser[0][3]
-                    return redirect("/", code=302)
+                    verifyPassword = database.get_registered_user(user, password)
+                    if not verifyPassword:
+                        return "Wrong Password"
+                    else:
+                        session['hash'] = verifyPassword[0][3]
+                        return redirect("/", code=302)
 
             else:
                 return "login failed, not every field was filled!"
@@ -131,15 +136,7 @@ def register():
     if security.verify_request():
         return redirect("/", code=302)
     else:
-        return render_template('register_form.html')
-
-
-def validation(username, password):
-    if username == "admin" and password == "secret":
-        return redirect(url_for("index", userName=username))
-    else:
-        return render_template("login.html", error="invalid credentials")
-
+        return render_template('register_form.html', error="TestError")
 
 #   Redirect user on /project call to index
 @app.route("/projects")
