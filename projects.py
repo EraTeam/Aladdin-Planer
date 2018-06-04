@@ -16,10 +16,21 @@ def verifyProjectState(verifyId, projectId):
             return "<div class='ui warning message'>There are currenlty no cards in your project.</div>"
         else:
             returnHtml = []
-            returnHtml.append('<div class="ui four cards">')  # four cards container
+            returnHtml.append('<div class="ui four link cards">')  # four cards container
 
             for row in getCards:
-                html = render_template("project_cards.html", title=row[2], description=row[3], date=row[4])
+
+                cardMetaData = [
+                    ["date", row[5]],
+                    ["","test"]
+                ]
+
+                html = render_template(
+                    "list_cards.html",
+                    title=row[3],
+                    description=row[4],
+                    metaData=cardMetaData
+                )
                 returnHtml.append(html)
 
             returnHtml.append('</div>')

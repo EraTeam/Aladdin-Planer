@@ -1,0 +1,20 @@
+<div class="ui card orange">
+    <div class="content">
+        <i class="right floated orange hourglass icon"></i>
+        <div class="header">{{ title }}</div>
+
+        {% if metaData %}
+            <div class="meta">
+                {% for data in metaData %}
+                    <span class="ui {{ data[0] }}">{{ data[1] }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="description">
+            {{ description }}
+        </div>
+
+    </div>
+    {#    <a class="ui bottom  button" href="/projects/{{ id }}">Open Project</a>#}
+</div>
