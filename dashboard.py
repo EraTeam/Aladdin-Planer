@@ -55,4 +55,4 @@ def getActiveProjectLinks():
 
 
 def renderDashboard(hash):
-    return util.prepareHtmlLayout(hash, getActiveProjectCards(), 0)
+    return util.prepareHtmlLayout(hash, getActiveProjectCards(), 0, "Create new project")

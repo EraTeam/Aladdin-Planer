@@ -125,3 +125,19 @@ def getProjectCards(id):
         return False
     else:
         return rows
+
+
+def createProjectCards(id, title, description):
+
+    now = datetime.datetime.now()
+    timestamp = now.strftime("%Y-%m-%d %H-%M")    
+
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute(
+        "INSERT INTO projectCards(projectId, active, title, description, date) VALUES(?, 1, ?, ?, ?)",
+        (id, title, description, timestamp)
+    )
+    conn.commit()
+
+    return True

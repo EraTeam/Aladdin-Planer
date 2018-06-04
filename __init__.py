@@ -155,9 +155,12 @@ def call_projects_page_valid(id):
     if session.get('hash'):
 
         if(database.verifyUserHash(session.get('hash'))):
-        
+           
             validate = database.validateProject(id)
-            return projects.renderProjects(session.get('hash'), validate)
+            if validate is True:
+                return projects.renderProjects(session.get('hash'), validate, id)
+            else:
+                return redirect("/", code=302)                
 
         else:
             return redirect("/", code=302)
@@ -172,20 +175,67 @@ def call_projects_page_valid(id):
 def create_project():
     if session.get('hash'):
 
-        if request.method == "POST":
-            title = request.form["project_title"]
-            description = request.form["project_description"]
+        if(database.verifyUserHash(session.get('hash'))):
 
-            if title != "" and description != "":
-                database.createNewProject(title, description)
-                return redirect("/", code=302)
+            if request.method == "POST":
+                title = request.form["project_title"]
+                description = request.form["project_description"]
+
+                if title != "" and description != "":
+                    database.createNewProject(title, description)
+                    return redirect("/", code=302)
+                else:
+                    return redirect("/", code=302)
+                    
             else:
                 return redirect("/", code=302)
-                
         else:
             return redirect("/", code=302)
+            
+
     else:
         return redirect("/", code=302)        
+
+
+@app.route("/add_card", methods=['POST'])
+def add_card():
+    if session.get('hash'):
+
+        if(database.verifyUserHash(session.get('hash'))):
+
+            if request.method == "POST":
+                title = request.form["card_title"]
+                description = request.form["card_description"]
+
+                if title != "" and description != "":
+                    getId = str(request.referrer).split("/")
+                    database.createProjectCards(int(getId[4]), title, description) 
+                    return redirect("/projects/" + getId[4], code=302)
+
+                else:
+                    return redirect("/", code=302)        
+            else:
+                return redirect("/", code=302)        
+                    
+    else:
+        return redirect("/", code=302)        
+        
+
+
+@app.route("/profile")
+def profile_page():
+    if session.get('hash'):
+
+        if(database.verifyUserHash(session.get('hash'))):
+            return "profile page"
+
+        else:
+            return redirect("/", code=302)        
+
+    else:
+        return redirect("/", code=302)        
+        
+
 
 
 if __name__ == '__main__':

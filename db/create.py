@@ -16,5 +16,4 @@ def create_connection(db_file):
     cur.execute('CREATE TABLE projects(active INT, title TEXT, description TEXT, date TEXT)')
     cur.execute('CREATE TABLE projectCards(projectId INT, active INT, title TEXT, description TEXT, date TEXT);')  
 
-
 create_connection("base.db")

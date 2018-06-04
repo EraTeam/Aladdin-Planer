@@ -50,13 +50,14 @@ def getHtmlModal(type):
 
 
 
-def prepareHtmlLayout(hash, htmlContent, type):
+def prepareHtmlLayout(hash, htmlContent, type, modalActionMsg):
     return render_template(
         'index.html',
-        greetMessage="Willkommen,",
+        greetMessage="Welcome,",
         userName=getUserName(hash),
         location="Dashboard",
         templateModal=Markup(getHtmlModal(type)),
         htmlMainContent=Markup(htmlContent),
-        activeProjectLinks=Markup(getActiveProjectLinks())
+        activeProjectLinks=Markup(getActiveProjectLinks()),
+        createCardProject=modalActionMsg
     )

@@ -38,7 +38,7 @@
             </a>
 
             <!-- User Message -->
-            <span class="header item" title="User Welcome">
+            <a href="/profile" class="header item" title="Profile Page">
                 <img class="logo"
                      src="{{ url_for('static',filename='styles/semantic/assets/images/default_profile_pic.png') }}"
                      alt="Default Profile Image"
@@ -46,11 +46,11 @@
                 <span class="greet-message">{{ greetMessage }}</span>
                 &nbsp;
                 <span class="user-name">{{ userName }}</span>
-            </span>
+            </a>
 
             {# ---- Dynamic action menu buttons ----- #}
             <a class="header item" id="newProject">
-                <i class="ui icon plus circle"></i>Create new project
+                <i class="ui icon plus circle"></i>{{ createCardProject }}
             </a>
 
             {# ---- Static user buttons ---- #}
