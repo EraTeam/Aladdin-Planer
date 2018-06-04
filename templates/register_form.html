@@ -84,6 +84,8 @@
         });
     </script>
 
+
+
     <form action="/register_request" method="POST" class="ui large form">
         <div class="ui stacked segment">
             <div class="field required">
@@ -120,7 +122,13 @@
             </div>
             <div class="ui fluid large teal submit button">Login</div>
         </div>
-        <div class="ui error message"></div>
+        <div class="ui error message">
+         {% if error %}
+        <ul class="list">
+            <li>{{ error }}</li>
+        </ul>
+        {% endif %}
+        </div>
     </form>
 
     <div class="ui message">

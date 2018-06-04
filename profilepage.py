@@ -15,5 +15,5 @@ def content(hash):
 
 
 def renderProfile(hash):
-    return util.prepareHtmlLayout(hash, content(hash), 0, "Create new project")
+    return util.prepareHtmlLayout(hash, content(hash), 2, "Create new project")
 

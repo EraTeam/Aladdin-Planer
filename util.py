@@ -47,6 +47,20 @@ def getHtmlModal(type):
             ["Enter the cards description", "textarea", "text", "card_description", "Card Description"]
         ]
         return render_template('create_modal.html', headerText="Add a new card", actionPath="/add_card", formFields=fields)
+    elif type is None:
+        return ""
+
+def getHtmlNavBar(type):
+    if type is 0:
+        html = render_template('nav_bar_item.html', createCardProject="Create new project")
+        return html
+
+    elif type is 1:
+        html = render_template('nav_bar_item.html', createCardProject="Create new card")
+        return html
+
+    elif type is 2:
+        return ""
 
 
 
@@ -59,5 +73,6 @@ def prepareHtmlLayout(hash, htmlContent, type, modalActionMsg):
         templateModal=Markup(getHtmlModal(type)),
         htmlMainContent=Markup(htmlContent),
         activeProjectLinks=Markup(getActiveProjectLinks()),
-        createCardProject=modalActionMsg
+        createCardProject=modalActionMsg,
+        navbarAction=Markup(getHtmlNavBar(type))
     )
