@@ -21,14 +21,15 @@ def verifyProjectState(verifyId, projectId):
             for row in getCards:
 
                 cardMetaData = [
-                    ["date", row[5]],
+                    ["date", row[4]],
                     ["","test"]
                 ]
 
                 html = render_template(
                     "list_cards.html",
-                    title=row[3],
-                    description=row[4],
+                    title=row[2],
+                    description=row[3],
+                    status=getCardsStatus(row[5]),
                     metaData=cardMetaData
                 )
                 returnHtml.append(html)
@@ -42,6 +43,17 @@ def verifyProjectState(verifyId, projectId):
         htmlBody = "false"
 
     return htmlBody
+
+
+def getCardsStatus(statusId):
+    if statusId is 0:
+        return ["red", "hourglass", "To-Do"]
+    elif statusId is 1:
+        return ["blue", "rocket", "In Progress"]
+    elif statusId is 2:
+        return ["yellow", "eye", "In Revision"]
+    elif statusId is 3:
+        return ["green", "check", "Done"]
 
 
 def renderProjects(hash, verifyId, projectId):

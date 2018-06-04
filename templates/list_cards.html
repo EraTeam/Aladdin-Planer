@@ -1,6 +1,8 @@
-<div class="ui card orange">
+<div class="ui card {{ status[0] }}">
     <div class="content">
-        <i class="right floated orange hourglass icon"></i>
+        <span class="right floated" data-tooltip="{{ status[2] }}" data-variation="mini">
+            <i class=" {{ status[0] }} {{ status[1] }} icon"></i>
+        </span>
         <div class="header">{{ title }}</div>
 
         {% if metaData %}
