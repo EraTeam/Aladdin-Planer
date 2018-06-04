@@ -10,11 +10,9 @@ from flask import Flask
 from flask import render_template, request, url_for, redirect, session
 
 #   Sys modul for our custom made moudls
-#   @TODO: wee need to find a workaround for that
 import sys
-#sys.path.append("/home/levent/PycharmProjects/Aladdin-Planer-2/")
-#sys.path.append("/home/kian/schule/dev/aladdin-planer/Aladdin-Planer/")
-sys.path.append("/home/jan/PycharmProjects/Aladdin-Planer/")
+import os
+sys.path.append(os.path.abspath('./'))
 
 #   Aladding planer modules
 import database
