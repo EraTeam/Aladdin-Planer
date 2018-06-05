@@ -212,7 +212,21 @@ def profile_page():
         return profilepage.renderProfile(session.get('hash'))
     else:
         return redirect("/", code=302)
-    
+
+
+@app.route("/save_changes", methods=["POST"])
+def save_changes():
+    username = request.form["username"]
+    password = request.form["password"]
+    email = request.form["email"]
+    sessionhash = session.get('hash')
+    if database.updateUser(username, password, email, sessionhash):
+        return redirect("/profile", code=302)
+    else:
+        return "Fehler."
+
+
+
 
 
 

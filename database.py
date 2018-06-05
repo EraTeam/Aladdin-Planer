@@ -1,6 +1,7 @@
 import sqlite3
 import hashlib
 import datetime
+import logging
 
 def connect_db():
     conn = sqlite3.connect("db/base.db")
@@ -152,3 +153,28 @@ def createProjectCards(id, title, description):
     conn.commit()
 
     return True
+
+
+def updateUser(username, password, email, sessionhash):
+    if username != "" and password != "" and email != "" and not checkIfUserExists(username, sessionhash):
+        conn = connect_db()
+        cur = conn.cursor()
+        cur.execute("UPDATE users SET username=?, password=?, email=? WHERE userHash=?",
+                    (username, password, email, sessionhash))
+        conn.commit()
+        return True
+    else:
+        return False
+
+def checkIfUserExists(username, sessionhash):
+    conn = connect_db()
+    cur = conn.cursor()
+
+    users = cur.execute("SELECT username FROM users")
+    for user in users:
+        if username in user:
+            return True
+
+    return False
+
+

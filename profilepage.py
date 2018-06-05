@@ -8,10 +8,10 @@ def content(hash):
     getUserInfo = database.getUserInformation(hash)
 
     if getUserInfo is not False:
-        return "worked"
+        for row in getUserInfo:
+            return render_template("profile.html", username=row[0], email=row[1], password=row[2])
     else:
         return False
-
 
 
 def renderProfile(hash):

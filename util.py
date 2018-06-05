@@ -47,7 +47,7 @@ def getHtmlModal(type):
             ["Enter the cards description", "textarea", "text", "card_description", "Card Description"]
         ]
         return render_template('create_modal.html', headerText="Add a new card", actionPath="/add_card", formFields=fields)
-    elif type is None:
+    elif type is 2:
         return ""
 
 def getHtmlNavBar(type):
