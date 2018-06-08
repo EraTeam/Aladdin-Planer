@@ -1,0 +1,22 @@
+<div class="ui card {{ status[0] }}">
+    <div class="content">
+        <span class="right floated" data-tooltip="{{ status[2] }}" data-variation="mini">
+            <i class=" {{ status[0] }} {{ status[1] }} icon"></i>
+        </span>
+        <div class="header">{{ title }}</div>
+
+        {% if metaData %}
+            <div class="meta">
+                {% for data in metaData %}
+                    <span class="ui {{ data[0] }}">{{ data[1] }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="description">
+            {{ description }}
+        </div>
+
+    </div>
+    {#    <a class="ui bottom  button" href="/projects/{{ id }}">Open Project</a>#}
+</div>

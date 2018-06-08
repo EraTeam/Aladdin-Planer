@@ -129,7 +129,7 @@ def validateProject(id):
 def getProjectCards(id):
     conn = connect_db()
     cur = conn.cursor()
-    cur.execute("SELECT * FROM projectCards WHERE projectId=?", (id, ))    
+    cur.execute("SELECT * FROM projectCards WHERE projectId=?", (id, ))
     conn.commit()
     rows = cur.fetchall()
 
