@@ -1,32 +1,138 @@
 {% extends "login.html" %}
 {% block login_register_form %}
-<form action="/register_request" method="POST">
-    <fieldset class="username">
-        <div class="icon left"><i class="fa fa-user"></i></div>
-        <input type="text" name="username" placeholder="Username"/>
-    </fieldset>
-    <fieldset class="email">
-        <div class="icon left"><i class="fa fa-envelope"></i></div>
-        <input type="mail" name="email" placeholder="Email"/>
-    </fieldset>
-    <fieldset class="email">
-        <div class="icon left"><i class="fa fa-envelope"></i></div>
-        <input type="mail" name="email-confirm" placeholder="Confirm Email"/>
-    </fieldset>
-    <fieldset class="password">
-        <div class="icon left"><i class="fa fa-lock"></i></div>
-        <input type="password" name="password" placeholder="Password"/>
-    </fieldset>
-    <fieldset class="password">
-        <div class="icon left"><i class="fa fa-lock"></i></div>
-        <input type="password" name="password-confirm" placeholder="Confirm Password"/>
-    </fieldset>
-    <fieldset class="submit button">
-        <p>Register</p>
-        <input class="none" type="submit" name="submit" placeholder="Register"/>
-        <div class="icon right button"><i class="arrow"></i></div>
-    </fieldset>
-    <div class="register">Already Logged in? <a href="/login">Log in here!</a></div>
-</form>
+
+    <h2 class="ui header">
+        <div class="ui message">
+            Create a new Account!
+        </div>
+    </h2>
+
+    <script>
+        $(document).ready(function () {
+            $('.ui.form').form({
+                fields: {
+                    username: {
+                        identifier: 'username',
+                        rules: [
+                            {
+                                type: 'empty',
+                                prompt: 'Please enter your username'
+                            }
+                        ]
+                    },
+                    email: {
+                        identifier: 'email',
+                        rules: [
+                            {
+                                type: 'email',
+                                prompt: 'Please enter a valid e-mail'
+                            },
+                            {
+                                type: 'empty',
+                                prompt: 'Please enter your e-mail'
+                            }
+                        ]
+                    },
+                    password: {
+                        identifier: 'password',
+                        rules: [
+                            {
+                                type: 'empty',
+                                prompt: 'Please enter your password'
+                            },
+                            {
+                                type: 'length[6]',
+                                prompt: 'Your password must be at least 6 characters'
+                            }
+                        ]
+                    },
+                    name: {
+                        identifier: 'name',
+                        rules: [
+                            {
+                                type: 'empty',
+                                prompt: 'Please enter your name'
+                            }
+                        ]
+                    },
+                    surname: {
+                        identifier: 'surname',
+                        rules: [
+                            {
+                                type: 'empty',
+                                prompt: 'Please enter your surname'
+                            }
+                        ]
+                    }
+                }
+            });
+            $(':input').on('change', function () {
+                let $value = $(this)[0].value;
+                if ($value === "" || $(this)[0].type === 'password') {
+                    return
+                }
+                $(this)[0].value = $value.replace(/^\s*/, '').replace(/\s*$/, '');
+            });
+
+            $('input[name="name"], input[name="surname"]').on('change', function () {
+                let $value = $(this)[0].value;
+                if ($value === "") {
+                    return
+                }
+                $(this)[0].value = $value.substr(0, 1).toUpperCase() + $value.substr(1);
+            });
+        });
+    </script>
+
+
+
+    <form action="/register_request" method="POST" class="ui large form">
+        <div class="ui stacked segment">
+            <div class="field required">
+                <div class="ui left icon input" data-tooltip="Enter Your Username" data-position="left center">
+                    <i class="user icon"></i>
+                    <input type="text" name="username" placeholder="Username">
+                </div>
+            </div>
+            <div class="two fields">
+                <div class="field required">
+                    <div class="ui left icon input" data-tooltip="Enter Your Name" data-position="left center">
+                        <i class="user icon"></i>
+                        <input type="text" name="name" placeholder="Name">
+                    </div>
+                </div>
+                <div class="field required">
+                    <div class="ui left icon input" data-tooltip="Enter Your Surname" data-position="right center">
+                        <i class="user icon"></i>
+                        <input type="text" name="surname" placeholder="Surname">
+                    </div>
+                </div>
+            </div>
+            <div class="field required">
+                <div class="ui left icon input" data-tooltip="Enter Your Email" data-position="left center">
+                    <i class="mail icon"></i>
+                    <input type="email" name="email" placeholder="Email">
+                </div>
+            </div>
+            <div class="field required">
+                <div class="ui left icon input" data-tooltip="Choose Your Password" data-position="left center">
+                    <i class="lock icon"></i>
+                    <input type="password" name="password" placeholder="Password">
+                </div>
+            </div>
+            <div class="ui fluid large teal submit button">Login</div>
+        </div>
+        <div class="ui error message">
+         {% if error %}
+        <ul class="list">
+            <li>{{ error }}</li>
+        </ul>
+        {% endif %}
+        </div>
+    </form>
+
+    <div class="ui message">
+        Already have an account? <a href="/login">Log In</a>
+    </div>
 
 {% endblock %}

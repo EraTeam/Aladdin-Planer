@@ -19,20 +19,27 @@
 
     <!-- CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
-    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/normalize.min.css') }}">-->
-    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/skeleton.min.css') }}">-->
-    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/card.min.css') }}">-->
-    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/normalize.css') }}">-->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/skeleton/skeleton.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/aladdin-framework.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static',filename='styles/fontawesome-free-5.0.8/web-fonts-with-css/css/fontawesome-all.css') }}" >
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/login.css') }}">
-    <script src="{{ url_for('static',filename='javascript/jquery-3.3.1.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/semantic/reset.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/semantic/semantic.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/semantic/grid.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/custom.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/semantic/login.css') }}">
+
 
     <!-- Favicon
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-</head>
+    <!-- Javascript
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="{{ url_for('static', filename='javascript/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/semantic/semantic.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/semantic/less.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/semantic/highlight.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/semantic/docs.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/semantic/sidebar.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/semantic/widgets.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/semantic/form.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/semantic/transition.js') }}"></script>
+
 
 {% block body %}{% endblock %}
